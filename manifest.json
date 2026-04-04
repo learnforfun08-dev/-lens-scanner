@@ -1,0 +1,65 @@
+{
+  "name": "Lens Scanner",
+  "short_name": "Lens",
+  "description": "Fast, private QR & barcode scanner — scan, generate, and manage codes entirely on-device.",
+  "start_url": "/lens-scanner/index.html",
+  "scope": "/lens-scanner/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#080810",
+  "background_color": "#080810",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/lens-scanner/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/lens-scanner/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/lens-scanner/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/lens-scanner/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/lens-scanner/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Lens Scanner — QR & Barcode Scanner"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Scan Code",
+      "short_name": "Scan",
+      "description": "Open the live camera scanner",
+      "url": "/lens-scanner/index.html#scan",
+      "icons": [{ "src": "/lens-scanner/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Generate QR",
+      "short_name": "Generate",
+      "description": "Create a new QR code",
+      "url": "/lens-scanner/index.html#gen",
+      "icons": [{ "src": "/lens-scanner/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "categories": ["utilities", "productivity"],
+  "lang": "en"
+}
