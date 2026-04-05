@@ -11,9 +11,6 @@
 <link rel="manifest" href="/lens-scanner/manifest.json">
 <link rel="apple-touch-icon" sizes="192x192" href="/lens-scanner/icons/icon-192.png">
 <link rel="apple-touch-icon" sizes="512x512" href="/lens-scanner/icons/icon-512.png">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -679,10 +676,10 @@ body::before{
 /* GENERATOR settings persist notice */
 .persist-note{font-size:.68rem;color:var(--subtle);text-align:center;font-family:var(--font-mono);}
 
-/* ═══════════════════════ PWA INSTALL BANNER ═══════════════════════ */
+/* ══════════════ PWA INSTALL BANNER ══════════════ */
 #pwaFab{
   position:fixed;bottom:calc(84px + var(--safe-bottom));right:16px;
-  width:48px;height:48px;border-radius:50%;
+  width:50px;height:50px;border-radius:50%;
   background:linear-gradient(135deg,#7c6fff,#b09eff);
   box-shadow:0 4px 20px rgba(124,111,255,.5);
   border:none;cursor:pointer;z-index:500;
@@ -691,38 +688,36 @@ body::before{
 }
 #pwaFab.show{display:flex;}
 #pwaFab svg{width:22px;height:22px;color:#fff;}
-@keyframes fabBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes fabBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 
 #pwaBanner{
   position:fixed;bottom:0;left:0;right:0;
   max-width:480px;margin:0 auto;
   background:#0f0f1a;
-  border:1px solid #252540;border-bottom:none;
+  border:1px solid #2a2a3d;border-bottom:none;
   border-radius:22px 22px 0 0;
   z-index:600;
   transform:translateY(110%);
   transition:transform .4s cubic-bezier(.34,1.2,.64,1);
-  box-shadow:0 -8px 40px rgba(0,0,0,.6);
-  overflow:hidden;
-  padding-bottom:var(--safe-bottom);
+  box-shadow:0 -8px 40px rgba(0,0,0,.7);
+  padding-bottom:env(safe-area-inset-bottom,0px);
 }
-#pwaBanner.show{transform:translateY(0);}
+#pwaBanner.open{transform:translateY(0);}
 .pwa-handle{
-  width:36px;height:4px;background:#252540;border-radius:2px;
-  margin:12px auto 0;cursor:grab;
+  width:40px;height:4px;background:#32325a;border-radius:2px;
+  margin:14px auto 0;cursor:grab;
 }
-.pwa-banner-inner{padding:16px 20px 22px;}
-.pwa-banner-row{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
-.pwa-app-icon{
-  width:56px;height:56px;border-radius:14px;flex-shrink:0;
+.pwa-inner{padding:16px 20px 20px;}
+.pwa-row{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.pwa-icon-box{
+  width:58px;height:58px;border-radius:14px;flex-shrink:0;
   background:linear-gradient(135deg,#7c6fff,#b09eff);
   display:flex;align-items:center;justify-content:center;
   box-shadow:0 4px 16px rgba(124,111,255,.35);
 }
-.pwa-app-icon svg{width:26px;height:26px;}
-.pwa-app-info{flex:1;}
+.pwa-icon-box svg{width:28px;height:28px;}
 .pwa-app-name{font-size:1rem;font-weight:800;font-family:'Syne',sans-serif;color:#eeeef8;margin-bottom:2px;}
-.pwa-app-sub{font-size:.75rem;color:#7070a0;}
+.pwa-app-by{font-size:.75rem;color:#7070a0;}
 .pwa-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
 .pwa-chip{
   font-size:.68rem;font-weight:600;font-family:'Outfit',sans-serif;
@@ -731,52 +726,38 @@ body::before{
   color:#b09eff;display:flex;align-items:center;gap:4px;
 }
 .pwa-chip svg{width:11px;height:11px;}
-
-/* Android/Desktop install button */
-#pwaInstallBtn{
+#pwaAndroidBtn{
   width:100%;padding:14px;border-radius:14px;border:none;
   background:linear-gradient(135deg,#00e5a0,#00b47a);
   color:#080810;font-size:.95rem;font-weight:800;
   font-family:'Syne',sans-serif;cursor:pointer;
   display:flex;align-items:center;justify-content:center;gap:8px;
   box-shadow:0 4px 20px rgba(0,229,160,.3);
-  transition:transform .15s,box-shadow .15s;
-  margin-bottom:10px;
+  transition:opacity .15s;margin-bottom:10px;
 }
-#pwaInstallBtn:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(0,229,160,.4);}
-#pwaInstallBtn svg{width:18px;height:18px;}
-#pwaInstallBtn.hide{display:none;}
-
-/* iOS instructions */
-#pwaIosSteps{display:none;margin-bottom:10px;}
-#pwaIosSteps.show{display:block;}
-.ios-steps-title{font-size:.78rem;font-weight:700;color:#b09eff;font-family:'Syne',sans-serif;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+#pwaAndroidBtn:hover{opacity:.9;}
+#pwaAndroidBtn svg{width:18px;height:18px;}
+#pwaIosBox{display:none;margin-bottom:10px;}
+.ios-title{font-size:.75rem;font-weight:700;color:#b09eff;font-family:'Syne',sans-serif;
+  text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
 .ios-steps{display:flex;flex-direction:column;gap:8px;}
-.ios-step{display:flex;align-items:center;gap:10px;font-size:.82rem;color:#eeeef8;}
-.ios-step-num{
-  width:24px;height:24px;border-radius:50%;flex-shrink:0;
+.ios-step{display:flex;align-items:center;gap:10px;font-size:.83rem;color:#eeeef8;line-height:1.4;}
+.ios-num{width:24px;height:24px;border-radius:50%;flex-shrink:0;
   background:rgba(124,111,255,.2);border:1px solid rgba(124,111,255,.3);
   display:flex;align-items:center;justify-content:center;
-  font-size:.7rem;font-weight:700;color:#b09eff;font-family:'Syne',sans-serif;
-}
-.ios-step-icon{font-size:1rem;}
-
-.pwa-dismiss-link{
-  display:block;text-align:center;font-size:.75rem;color:#7070a0;
-  background:none;border:none;cursor:pointer;font-family:'Outfit',sans-serif;
-  padding:4px;width:100%;
-}
-.pwa-dismiss-link:hover{color:#eeeef8;}
-
-/* installed success strip */
-#pwaInstalledMsg{
-  display:none;position:fixed;top:16px;left:50%;transform:translateX(-50%);
+  font-size:.7rem;font-weight:700;color:#b09eff;font-family:'Syne',sans-serif;}
+.pwa-skip{display:block;text-align:center;font-size:.75rem;color:#7070a0;
+  background:none;border:none;cursor:pointer;font-family:'Outfit',sans-serif;padding:6px;width:100%;}
+.pwa-skip:hover{color:#eeeef8;}
+#pwaSuccessMsg{
+  display:none;position:fixed;top:18px;left:50%;transform:translateX(-50%) translateY(-20px);
+  opacity:0;
   background:rgba(0,229,160,.15);border:1px solid rgba(0,229,160,.3);color:#00e5a0;
-  font-size:.8rem;font-weight:600;font-family:'Outfit',sans-serif;
-  padding:10px 20px;border-radius:20px;z-index:700;
-  white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.4);
+  font-size:.82rem;font-weight:600;font-family:'Outfit',sans-serif;
+  padding:10px 22px;border-radius:20px;z-index:700;white-space:nowrap;
+  box-shadow:0 4px 20px rgba(0,0,0,.4);transition:opacity .3s,transform .3s;
 }
-#pwaInstalledMsg.show{display:block;animation:popUp .4s cubic-bezier(.34,1.56,.64,1);}
+#pwaSuccessMsg.show{display:block;opacity:1;transform:translateX(-50%) translateY(0);}
 
 </style>
 </head>
@@ -1259,7 +1240,7 @@ body::before{
   </div>
 </div>
 
-<!-- pwaToast replaced by full install banner -->
+<!-- old pwaToast removed -->
 
 <script>
 /* ═══════════════════════════════════════
@@ -1275,28 +1256,24 @@ const manifest = {
     sizes: "512x512", type: "image/svg+xml", purpose: "any maskable"
   }]
 };
-// manifest.json served as a real file — no inline injection needed
+// manifest served as /lens-scanner/manifest.json
 
 /* ═══════════════════════════════════════
    SERVICE WORKER
 ═══════════════════════════════════════ */
-// Real service worker — registered from sw.js
+// Service worker — /lens-scanner/sw.js
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/lens-scanner/sw.js', { scope: '/lens-scanner/' })
       .then(reg => console.log('[SW] Registered', reg.scope))
-      .catch(err => console.warn('[SW] Registration failed:', err));
+      .catch(err => console.warn('[SW] Failed:', err));
   });
-}
+});
 
 /* ═══════════════════════════════════════
    PWA INSTALL
 ═══════════════════════════════════════ */
-let deferredPrompt = null;
-const installBtn = document.getElementById('installBtn');
-const pwaToast   = document.getElementById('pwaToast');
-
-// PWA install logic handled by full banner below
+// PWA install handled by banner script below
 
 /* ═══════════════════════════════════════
    HELPERS
@@ -2372,189 +2349,185 @@ document.addEventListener('visibilitychange', () => {
   if (document.hidden && scanActive) stopScan();
 });
 
-// PWA install prompt — trigger after first scan instead of on timer
-let hasScanned = false;
-function maybeShowPwaPrompt() {
-  if (!hasScanned && deferredPrompt && getSettings().pwa !== false) {
-    hasScanned = true;
-    setTimeout(() => { if (deferredPrompt) pwaToast.classList.add('show'); }, 2000);
-  }
-}
-// Override the 3s timer from the beforeinstallprompt handler
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault(); deferredPrompt = e;
-  installBtn.classList.add('show');
-  // Don't auto-show — wait for first scan via maybeShowPwaPrompt()
-}, { once: true }); // prevent double-registration with existing handler
+// maybeShowPwaPrompt — defined by banner script below; stub here so call doesn't crash
+function maybeShowPwaPrompt() {}
+// PWA events handled by banner script below
 </script>
 
-<!-- ═══════════════ PWA INSTALL BANNER ═══════════════ -->
-<div id="pwaBanner" role="dialog" aria-label="Install Lens Scanner">
-  <div class="pwa-handle" id="pwaHandle"></div>
-  <div class="pwa-banner-inner">
-    <div class="pwa-banner-row">
-      <div class="pwa-app-icon">
+<!-- ══════════════ PWA INSTALL BANNER ══════════════ -->
+<div id="pwaBanner" role="dialog" aria-modal="true" aria-label="Install Lens Scanner">
+  <div class="pwa-handle" id="pwaDragHandle"></div>
+  <div class="pwa-inner">
+    <div class="pwa-row">
+      <div class="pwa-icon-box">
         <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/>
           <rect x="7" y="7" width="4" height="4" rx="1"/><rect x="13" y="7" width="4" height="4" rx="1"/><rect x="7" y="13" width="4" height="4" rx="1"/>
         </svg>
       </div>
-      <div class="pwa-app-info">
+      <div>
         <div class="pwa-app-name">Lens Scanner</div>
-        <div class="pwa-app-sub">learnforfun08-dev · Free</div>
+        <div class="pwa-app-by">learnforfun08-dev &middot; Free</div>
       </div>
     </div>
 
     <div class="pwa-chips">
-      <span class="pwa-chip">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l5 5 5-5 5 5 5-5"/><path d="M1 13l5 5 5-5 5 5 5-5"/></svg>
-        Works offline
-      </span>
-      <span class="pwa-chip">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        Instant open
-      </span>
-      <span class="pwa-chip">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        100% private
-      </span>
-      <span class="pwa-chip">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-        No browser bar
-      </span>
+      <span class="pwa-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l5 5 5-5 5 5 5-5"/><path d="M1 13l5 5 5-5 5 5 5-5"/></svg>Works offline</span>
+      <span class="pwa-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Instant open</span>
+      <span class="pwa-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>100% private</span>
+      <span class="pwa-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>No browser bar</span>
     </div>
 
-    <!-- Android / Desktop native prompt -->
-    <button id="pwaInstallBtn">
+    <button id="pwaAndroidBtn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Install App — It's Free
     </button>
 
-    <!-- iOS step-by-step -->
-    <div id="pwaIosSteps">
-      <div class="ios-steps-title">Add to Home Screen on iOS</div>
+    <div id="pwaIosBox">
+      <div class="ios-title">Add to Home Screen on iOS</div>
       <div class="ios-steps">
-        <div class="ios-step">
-          <span class="ios-step-num">1</span>
-          <span class="ios-step-icon">📤</span>
-          <span>Tap the <strong>Share</strong> button in Safari's toolbar</span>
-        </div>
-        <div class="ios-step">
-          <span class="ios-step-num">2</span>
-          <span class="ios-step-icon">➕</span>
-          <span>Scroll down and tap <strong>Add to Home Screen</strong></span>
-        </div>
-        <div class="ios-step">
-          <span class="ios-step-num">3</span>
-          <span class="ios-step-icon">✅</span>
-          <span>Tap <strong>Add</strong> — Lens Scanner will appear on your home screen</span>
-        </div>
+        <div class="ios-step"><span class="ios-num">1</span><span>Tap the <strong>Share</strong> button <strong>&#x2197;</strong> in Safari's toolbar</span></div>
+        <div class="ios-step"><span class="ios-num">2</span><span>Scroll down and tap <strong>Add to Home Screen</strong></span></div>
+        <div class="ios-step"><span class="ios-num">3</span><span>Tap <strong>Add</strong> — Lens Scanner appears on your home screen</span></div>
       </div>
     </div>
 
-    <button class="pwa-dismiss-link" onclick="dismissBanner()">Not now</button>
+    <button class="pwa-skip" id="pwaSkip">Not now</button>
   </div>
 </div>
 
-<!-- Floating FAB -->
-<button id="pwaFab" aria-label="Install app" onclick="openBanner()">
+<button id="pwaFab" aria-label="Install Lens Scanner app">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
 </button>
 
-<!-- Installed success message -->
-<div id="pwaInstalledMsg">🎉 Lens Scanner installed!</div>
-
+<div id="pwaSuccessMsg" aria-live="polite">&#x1F389; Lens Scanner installed!</div>
 
 <script>
-/* ═══════════════════════════════════════
-   FULL PWA INSTALL BANNER
-═══════════════════════════════════════ */
-(function() {
-  let deferredPrompt = null;
-  const DISMISSED_KEY = 'lens_pwa_dismissed';
+/* ══════════════ PWA INSTALL BANNER — single source of truth ══════════════ */
+(function () {
+  'use strict';
 
-  const banner     = document.getElementById('pwaBanner');
-  const fab        = document.getElementById('pwaFab');
-  const installBtn = document.getElementById('pwaInstallBtn');
-  const iosSteps   = document.getElementById('pwaIosSteps');
-  const installedMsg = document.getElementById('pwaInstalledMsg');
-  const headerBtn  = document.getElementById('installBtn');
+  /* ---- elements ---- */
+  var banner     = document.getElementById('pwaBanner');
+  var fab        = document.getElementById('pwaFab');
+  var androidBtn = document.getElementById('pwaAndroidBtn');
+  var iosBox     = document.getElementById('pwaIosBox');
+  var skipBtn    = document.getElementById('pwaSkip');
+  var successMsg = document.getElementById('pwaSuccessMsg');
+  var headerBtn  = document.getElementById('installBtn'); // small btn in app header
 
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches
-                    || window.navigator.standalone === true;
+  /* ---- state ---- */
+  var deferredPrompt = null;
+  var SKIP_KEY = 'lens_pwa_skip';
 
-  if (isStandalone) return;
+  /* ---- platform detection ---- */
+  var ua = navigator.userAgent;
+  var isIOS        = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isStandalone = window.matchMedia('(display-mode: standalone)').matches
+                  || navigator.standalone === true;
 
-  if (isIOS) {
-    if (installBtn) installBtn.classList.add('hide');
-    if (iosSteps)   iosSteps.classList.add('show');
+  /* Already installed as PWA — hide everything and bail */
+  if (isStandalone) {
+    if (headerBtn) headerBtn.style.display = 'none';
+    return;
   }
 
-  window.addEventListener('beforeinstallprompt', e => {
+  /* iOS: hide native button, show step-by-step */
+  if (isIOS) {
+    if (androidBtn) androidBtn.style.display = 'none';
+    if (iosBox) iosBox.style.display = 'block';
+  }
+
+  /* ---- capture the native install prompt (Android / Desktop Chrome) ---- */
+  window.addEventListener('beforeinstallprompt', function (e) {
     e.preventDefault();
     deferredPrompt = e;
     if (headerBtn) headerBtn.classList.add('show');
+    console.log('[PWA] beforeinstallprompt captured');
   });
 
-  if (headerBtn) headerBtn.addEventListener('click', openBanner);
-
+  /* ---- open / close ---- */
   function openBanner() {
-    if (banner) banner.classList.add('show');
+    if (banner) banner.classList.add('open');
     if (fab)    fab.classList.remove('show');
   }
-  window.openBanner = openBanner;
-
-  window.dismissBanner = function() {
-    if (banner) banner.classList.remove('show');
-    localStorage.setItem(DISMISSED_KEY, '1');
-    setTimeout(() => { if (fab) fab.classList.add('show'); }, 600);
-  };
-
-  // Swipe-down on handle to dismiss
-  const handle = document.getElementById('pwaHandle');
-  if (handle) {
-    let touchStartY = 0;
-    handle.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, {passive:true});
-    handle.addEventListener('touchmove', e => {
-      if (e.touches[0].clientY - touchStartY > 60) window.dismissBanner();
-    }, {passive:true});
+  function closeBanner() {
+    if (banner) banner.classList.remove('open');
+  }
+  function dismissBanner() {
+    closeBanner();
+    sessionStorage.setItem(SKIP_KEY, '1');
+    /* show FAB so they can come back */
+    setTimeout(function () { if (fab) fab.classList.add('show'); }, 700);
   }
 
-  if (installBtn) {
-    installBtn.addEventListener('click', async () => {
-      if (!deferredPrompt) return;
+  /* expose globally so onclick attrs work */
+  window.openBanner   = openBanner;
+  window.dismissBanner = dismissBanner;
+
+  /* ---- wire buttons ---- */
+  if (skipBtn)    skipBtn.addEventListener('click',   dismissBanner);
+  if (fab)        fab.addEventListener('click',        openBanner);
+  if (headerBtn)  headerBtn.addEventListener('click',  openBanner);
+
+  /* Android / Desktop: native prompt */
+  if (androidBtn) {
+    androidBtn.addEventListener('click', async function () {
+      if (!deferredPrompt) {
+        /* no prompt captured yet — possible reasons: already installed,
+           not on HTTPS, or criteria not met. Show toast. */
+        alert('Install prompt not available yet. Make sure you are on HTTPS and using Chrome/Edge/Samsung Browser.');
+        return;
+      }
       deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
+      var result = await deferredPrompt.userChoice;
+      console.log('[PWA] User choice:', result.outcome);
       deferredPrompt = null;
-      if (outcome === 'accepted') {
-        if (banner) banner.classList.remove('show');
-        if (fab)    fab.classList.remove('show');
+      if (result.outcome === 'accepted') {
+        closeBanner();
+        if (fab) fab.classList.remove('show');
         if (headerBtn) headerBtn.classList.remove('show');
       }
     });
   }
 
-  window.addEventListener('appinstalled', () => {
-    if (banner) banner.classList.remove('show');
-    if (fab)    fab.classList.remove('show');
+  /* ---- appinstalled ---- */
+  window.addEventListener('appinstalled', function () {
+    closeBanner();
+    if (fab) fab.classList.remove('show');
     if (headerBtn) headerBtn.classList.remove('show');
-    if (installedMsg) {
-      installedMsg.classList.add('show');
-      setTimeout(() => installedMsg.classList.remove('show'), 4000);
+    if (successMsg) {
+      successMsg.classList.add('show');
+      setTimeout(function () { successMsg.classList.remove('show'); }, 4000);
     }
+    console.log('[PWA] App installed!');
   });
 
-  // Hook into maybeShowPwaPrompt — show banner after first scan
-  const _origMaybe = window.maybeShowPwaPrompt;
-  window.maybeShowPwaPrompt = function() {
+  /* ---- swipe-down on handle to dismiss ---- */
+  var handle = document.getElementById('pwaDragHandle');
+  if (handle) {
+    var startY = 0;
+    handle.addEventListener('touchstart', function (e) {
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+    handle.addEventListener('touchmove', function (e) {
+      if (e.touches[0].clientY - startY > 70) dismissBanner();
+    }, { passive: true });
+  }
+
+  /* ---- show banner after first successful scan ---- */
+  /* Override the stub maybeShowPwaPrompt that v5 calls after each scan */
+  window.maybeShowPwaPrompt = function () {
     if (isStandalone) return;
-    if (localStorage.getItem(DISMISSED_KEY)) {
-      setTimeout(() => { if (fab) fab.classList.add('show'); }, 800);
+    if (sessionStorage.getItem(SKIP_KEY)) {
+      /* previously dismissed this session — just nudge the FAB */
+      setTimeout(function () { if (fab) fab.classList.add('show'); }, 600);
       return;
     }
+    /* Show banner 1.5s after first scan so result card is visible first */
     setTimeout(openBanner, 1500);
   };
+
 })();
 </script>
 
